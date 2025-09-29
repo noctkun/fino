@@ -158,7 +158,7 @@ export default function DownloadPage() {
                     </div>
                     <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
                       <div className="w-4 h-4 bg-gray-300 rounded-full"></div>
-                      <span>Coming Q2 2024</span>
+                      <span>Coming Soon</span>
                     </div>
                   </div>
 
