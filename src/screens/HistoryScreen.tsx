@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 import { useSpending } from '../contexts/SpendingContext';
 import { THEME } from '../constants/colors';
 import { Spending } from '../types';
@@ -20,7 +21,12 @@ const HistoryScreen: React.FC = () => {
   const [fadeAnim] = useState(new Animated.Value(0));
   const [slideAnim] = useState(new Animated.Value(30));
 
-  useEffect(() => {
+  const triggerAnimations = useCallback(() => {
+    // Reset animations
+    fadeAnim.setValue(0);
+    slideAnim.setValue(30);
+    
+    // Start animations
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
@@ -33,7 +39,9 @@ const HistoryScreen: React.FC = () => {
         useNativeDriver: true,
       }),
     ]).start();
-  }, []);
+  }, [fadeAnim, slideAnim]);
+
+  useFocusEffect(triggerAnimations);
 
   const onRefresh = async () => {
     setRefreshing(true);

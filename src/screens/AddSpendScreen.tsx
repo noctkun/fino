@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import {
   Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 import { useSpending } from '../contexts/SpendingContext';
 import { THEME } from '../constants/colors';
 
@@ -25,7 +26,12 @@ const AddSpendScreen: React.FC = () => {
   const [fadeAnim] = useState(new Animated.Value(0));
   const [slideAnim] = useState(new Animated.Value(50));
 
-  useEffect(() => {
+  const triggerAnimations = useCallback(() => {
+    // Reset animations
+    fadeAnim.setValue(0);
+    slideAnim.setValue(50);
+    
+    // Start animations
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
@@ -38,7 +44,9 @@ const AddSpendScreen: React.FC = () => {
         useNativeDriver: true,
       }),
     ]).start();
-  }, []);
+  }, [fadeAnim, slideAnim]);
+
+  useFocusEffect(triggerAnimations);
 
   const handleAddSpending = async () => {
     if (!amount || !description || (!selectedCategory && !customCategory)) {

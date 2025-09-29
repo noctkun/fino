@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { PieChart } from 'react-native-chart-kit';
 import { Ionicons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 import * as Sharing from 'expo-sharing';
 import { captureRef } from 'react-native-view-shot';
 import { useSpending } from '../contexts/SpendingContext';
@@ -93,7 +94,12 @@ const DashboardScreen: React.FC = () => {
     data => data.month === months[selectedMonth]
   );
 
-  useEffect(() => {
+  const triggerAnimations = useCallback(() => {
+    // Reset animations
+    fadeAnim.setValue(0);
+    scaleAnim.setValue(0.8);
+    
+    // Start animations
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
@@ -107,7 +113,9 @@ const DashboardScreen: React.FC = () => {
         useNativeDriver: true,
       }),
     ]).start();
-  }, []);
+  }, [fadeAnim, scaleAnim]);
+
+  useFocusEffect(triggerAnimations);
 
   // Update available months when selected year changes
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { PieChart } from 'react-native-chart-kit';
 import { Ionicons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 import { useSpending } from '../contexts/SpendingContext';
 import { THEME } from '../constants/colors';
 import { PieChartData } from '../types';
@@ -45,7 +46,12 @@ const AnalysisScreen: React.FC = () => {
 
   const years = getAvailableYears();
 
-  useEffect(() => {
+  const triggerAnimations = useCallback(() => {
+    // Reset animations
+    fadeAnim.setValue(0);
+    slideAnim.setValue(30);
+    
+    // Start animations
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
@@ -58,7 +64,9 @@ const AnalysisScreen: React.FC = () => {
         useNativeDriver: true,
       }),
     ]).start();
-  }, []);
+  }, [fadeAnim, slideAnim]);
+
+  useFocusEffect(triggerAnimations);
 
   const getYearlyData = () => {
     const monthlyData = getMonthlyData(selectedYear);
