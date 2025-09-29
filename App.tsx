@@ -51,7 +51,7 @@ function TabNavigator() {
           borderTopWidth: 1,
           paddingBottom: Math.max(insets.bottom, 2),
           paddingTop: 4,
-          height: 54 + Math.max(insets.bottom, 2),
+          height: 64 + Math.max(insets.bottom, 2),
           elevation: 8,
           shadowColor: '#000',
           shadowOffset: { width: 0, height: -2 },
