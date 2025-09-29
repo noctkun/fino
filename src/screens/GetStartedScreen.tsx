@@ -389,9 +389,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingLeft: THEME.spacing.md,
   },
   leftButtons: {
     flexDirection: 'row',
@@ -426,7 +425,7 @@ const styles = StyleSheet.create({
     paddingVertical: THEME.spacing.md,
     paddingHorizontal: THEME.spacing.xl,
     borderRadius: THEME.borderRadius.lg,
-    marginLeft: THEME.spacing.xl,
+    marginRight: THEME.spacing.lg,
     ...THEME.shadows.sm,
   },
   nextButtonText: {
