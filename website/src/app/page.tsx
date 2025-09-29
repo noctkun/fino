@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Download, Smartphone, BarChart3, Shield, Zap, Heart } from 'lucide-react'
 import Link from 'next/link'

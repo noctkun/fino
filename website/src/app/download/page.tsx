@@ -1,12 +1,11 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Download, Smartphone, Apple, Smartphone as Android, Shield, CheckCircle, ArrowLeft } from 'lucide-react'
+import { Download, Apple, Smartphone as Android, CheckCircle, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
 export default function DownloadPage() {
-  const heroRef = useRef<HTMLDivElement>(null)
   const featuresRef = useRef<HTMLDivElement>(null)
 
   // No need for useEffect since we're using Framer Motion
@@ -188,7 +187,7 @@ export default function DownloadPage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              What's Included
+              What&apos;s Included
             </h2>
             <p className="text-xl text-gray-600">
               Everything you need to manage your finances effectively
