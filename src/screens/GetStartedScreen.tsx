@@ -266,13 +266,15 @@ const GetStartedScreen: React.FC<GetStartedScreenProps> = ({ onGetStarted }) => 
                     <Text style={styles.previousButtonText}>Previous</Text>
                   </TouchableOpacity>
                 )}
-                <TouchableOpacity
-                  style={styles.skipButton}
-                  onPress={handleSkip}
-                  activeOpacity={0.7}
-                >
-                  <Text style={styles.skipButtonText}>Skip</Text>
-                </TouchableOpacity>
+                {currentPage < features.length - 1 && (
+                  <TouchableOpacity
+                    style={styles.skipButton}
+                    onPress={handleSkip}
+                    activeOpacity={0.7}
+                  >
+                    <Text style={styles.skipButtonText}>Skip</Text>
+                  </TouchableOpacity>
+                )}
               </View>
               
               <TouchableOpacity
